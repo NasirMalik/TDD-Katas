@@ -9,8 +9,23 @@
 enum Direction: CaseIterable {
     case north, east, south, west
 
-    var turnLeft:  Direction { Direction.allCases[(Direction.allCases.firstIndex(of: self)! + 3) % 4] }
-    var turnRight: Direction { Direction.allCases[(Direction.allCases.firstIndex(of: self)! + 1) % 4] }
+    var turnLeft: Direction {
+        switch self {
+        case .north: return .west
+        case .west: return .south
+        case .south: return .east
+        case .east: return .north
+        }
+    }
+
+    var turnRight: Direction {
+        switch self {
+        case .north: return .east
+        case .east: return .south
+        case .south: return .west
+        case .west: return .north
+        }
+    }
 
     var description: String {
         switch self { case .north: return "N"; case .east: return "E"
